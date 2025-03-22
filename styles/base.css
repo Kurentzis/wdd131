@@ -83,7 +83,6 @@ main {
     flex-direction: column;
     background-color: #000;
     font-family: "Raleway", sans-serif;
-    font-optical-sizing: auto;
     font-weight: 400;
     font-style: normal;
     
@@ -187,7 +186,7 @@ aside h3 {
 }
 .slider-item:nth-child(1),
 .slider-item:nth-child(1) img {
-    animation-delay: 0;
+    animation-delay: 0s;
 }
 .slider-item:nth-child(2),
 .slider-item:nth-child(2) img {
