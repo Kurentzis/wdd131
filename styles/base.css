@@ -11,8 +11,6 @@ html {
 }
 body {
     background-color: rgb(22, 22, 22);
-    
-    /* background: radial-gradient(); */
     color: azure;
 
 }
@@ -29,8 +27,7 @@ h1 {
     text-align: center;
     margin: auto 0;
     font-family: "Raleway", sans-serif;
-    font-optical-sizing: auto;
-    font-weight: 600 bold;
+    font-weight: 600;
     font-style: normal;
 }
 h2 {
@@ -92,8 +89,6 @@ main {
     
 }
 .introduction{
-    /* border: green 1px solid; */
-    /* border-right: #808080 1px solid; */
     background-color: rgb(34, 34, 34);
     max-width: 70%;
     padding-top: 20px;
@@ -107,7 +102,6 @@ main {
 }
 .about-me-holder {
     width: 90%;
-    /* margin: 0 auto; */
     background-color: rgb(24, 24, 24);
     box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.5);
     border-radius: 0px 5px 5px 0px ;
@@ -117,8 +111,6 @@ main {
 .p_intro {
     font-size: 22px;
     width: 70%;
-    /* margin-top: 25px; */
-
     line-height: 30px;
     text-align: right;
     margin: auto 20px auto auto;
@@ -131,16 +123,12 @@ aside {
     height: 70vh;
     padding: 20px;
     width: 30%;
-    /* margin-left: 50px; */
     align-self: center;
-    /* border: #808080 solid 1px; */
-    /* border-right: none; */
     border-radius: 5px 0px 0px 5px;
     display: flex;
     flex-direction: column;
     background-color: rgb(24, 24, 24);
     box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.5);
-    /* background-color: rgb(22, 22, 22); */
 }
 aside ul{
     height: 90%;
@@ -253,8 +241,6 @@ footer {
     max-width: 100%;
     background-color: #1b1b1b;
     padding: 25px;
-    /* display: flex;
-    align-content: center; */
 }
 
 hr {
