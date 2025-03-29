@@ -68,7 +68,7 @@
         padding-top: 0;
     }
 
-    main h1 {
+    main h2 {
         grid-column: span 2;
     }
 }
