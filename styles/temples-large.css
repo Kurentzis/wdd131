@@ -1,4 +1,7 @@
 @media screen and (min-width: 1024px) {
+    body {
+        width: 80%;
+    }
     .burger {
         display: none;
     }
