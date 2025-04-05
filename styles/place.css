@@ -9,7 +9,7 @@
     --color-content: rgb(252, 189, 182);
     --color-blue: #00205b;
     --color-white: #ffffff;
-    --container-width-wide: 1000px;
+    --container-width-wide: 70%;
     --container-width-mobile: 97vw;
 }
 body {
@@ -114,7 +114,7 @@ footer {
     text-align: center;
 }
 
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 1200px) {
     body {
         width: var(--container-width-wide);
     }
