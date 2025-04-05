@@ -1,0 +1,170 @@
+* {
+    padding: 0;
+    margin: 0;
+    font-family: "Lora", serif;
+    box-sizing: border-box;
+}
+:root {
+    --color-red: #ba0c2f;
+    --color-content: rgb(252, 189, 182);
+    --color-blue: #00205b;
+    --color-white: #ffffff;
+    --container-width-wide: 1000px;
+    --container-width-mobile: 97vw;
+}
+body {
+    width: var(--container-width-mobile);
+    height: auto;
+    margin: 0 auto;
+}
+
+header {
+    /* width: 1000px; */
+    height: 30vw;
+    position: relative;
+    /* margin: 0px auto; */
+
+
+    & .flag {
+        position: relative;
+        width: inherit;
+        height: 100%;
+        /* height: 160px; */
+        background-color: var(--color-red);
+
+        & h1 {
+            color: var(--color-white);
+            position: absolute;
+            top: 15%;
+            left: 60%;
+            font-size: 3vw;
+    
+        }
+
+        & .flag__stripe {
+            position: absolute;
+        }
+        & .flag__stripe--white-vertical {
+            left: 20vw;
+            width: 5vw;
+            height: 100%;
+            background-color: var(--color-white);
+        }
+
+        & .flag__stripe--white-horizontal {
+            top: 12.5vw;
+            width: 100%;
+            height: 5vw;
+            background-color: var(--color-white);
+        }
+
+        & .flag__stripe--blue-vertical {
+            left: 21vw;
+            width: 3vw;
+            height: 100%;
+            background-color: var(--color-blue);
+        }
+
+        & .flag__stripe--blue-horizontal {
+            top: 13.5vw;
+            width: 100%;
+            height: 3vw;
+            background-color: var(--color-blue);
+        }
+    }
+    
+}
+
+main {
+    /* width: 1000px; */
+   
+    display: flex;
+    flex-direction: column;
+    /* margin: 0px auto; */
+    background-color: #e1f1f7;
+
+    & picture {
+        max-width: 100%;
+        height: auto;
+
+        & img {
+            width: 100%;
+            height: auto;
+        }
+    }
+
+    & .data, .weather {
+        text-align: center;
+        padding-top: 50px;
+        padding-bottom: 30px;
+
+        & h2 {
+            text-align: center;
+            margin: 10px;
+        }
+        & img {
+            width: 50px;
+            height: auto;
+        }
+    }
+}
+footer {
+    background-color: var(--color-content);
+    padding: 15px;
+    text-align: center;
+}
+
+@media screen and (min-width: 1024px) {
+    body {
+        width: var(--container-width-wide);
+    }
+
+    main {
+        height: fit-content;
+        position: relative;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+        grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
+        background-color: var(--color-content);
+
+        & picture {
+            grid-column: span 7;
+            grid-row: span 6;
+        }
+
+        & .data, .weather {
+            background-color: rgba(252, 189, 182, 0.8);
+            padding: 10px;
+            border-radius: 5px;
+            width: 231px;
+            
+        }
+
+        & .data {
+            margin-top: 25px;
+            grid-column: 2;
+            grid-row: 1;
+            position: absolute;
+          
+        }
+
+        & .weather {
+            text-align: center;
+            padding-top: 50px;
+            padding-bottom: 30px;
+            position: absolute;
+            grid-column: 2;
+            grid-row: 4;
+    
+            & h2 {
+                text-align: center;
+                margin: 10px;
+            }
+
+            & img {
+                width: 50px;
+                height: auto;
+            }
+        }
+    }
+}
