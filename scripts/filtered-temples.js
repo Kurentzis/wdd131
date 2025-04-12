@@ -26,7 +26,7 @@ temples.forEach(temple => {
 
     card.innerHTML = `
     <div>
-    <h2>${temple.templeName}<h2>
+    <h2>${temple.templeName}</h2>
     <p><strong>Location: </strong>${temple.location}</p>
     <p><strong>Dedicated: </strong>${temple.dedicated}</p> 
     <p><strong>Area: </strong>${temple.area}</p>
