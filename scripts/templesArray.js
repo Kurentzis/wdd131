@@ -6,6 +6,7 @@ export const temples = [
       area: 11500,
       imageUrl:
       "https://content.churchofjesuschrist.org/templesldsorg/bc/Temples/photo-galleries/aba-nigeria/400x250/aba-nigeria-temple-lds-273999-wallpaper.jpg"
+      , categories: ['new', 'large']
     },
     {
       templeName: "Manti Utah",
@@ -14,6 +15,7 @@ export const temples = [
       area: 74792,
       imageUrl:
       "https://content.churchofjesuschrist.org/templesldsorg/bc/Temples/photo-galleries/manti-utah/400x250/manti-temple-768192-wallpaper.jpg"
+      , categories: ['old', 'large']
     },
     {
       templeName: "Payson Utah",
@@ -22,6 +24,7 @@ export const temples = [
       area: 96630,
       imageUrl:
       "https://content.churchofjesuschrist.org/templesldsorg/bc/Temples/photo-galleries/payson-utah/400x225/payson-utah-temple-exterior-1416671-wallpaper.jpg"
+      , categories: ['new', 'large']
     },
     {
       templeName: "Yigo Guam",
@@ -30,6 +33,7 @@ export const temples = [
       area: 6861,
       imageUrl:
       "https://content.churchofjesuschrist.org/templesldsorg/bc/Temples/photo-galleries/yigo-guam/400x250/yigo_guam_temple_2.jpg"
+      , categories: ['new', 'small']
     },
     {
       templeName: "Washington D.C.",
@@ -38,6 +42,7 @@ export const temples = [
       area: 156558,
       imageUrl:
       "https://content.churchofjesuschrist.org/templesldsorg/bc/Temples/photo-galleries/washington-dc/400x250/washington_dc_temple-exterior-2.jpeg"
+      , categories: ['old', 'large']
     },
     {
       templeName: "Lima Perú",
@@ -46,6 +51,7 @@ export const temples = [
       area: 9600,
       imageUrl:
       "https://content.churchofjesuschrist.org/templesldsorg/bc/Temples/photo-galleries/lima-peru/400x250/lima-peru-temple-evening-1075606-wallpaper.jpg"
+      , categories: ['old', 'small']
     },
     {
       templeName: "Mexico City Mexico",
@@ -54,6 +60,7 @@ export const temples = [
       area: 116642,
       imageUrl:
       "https://content.churchofjesuschrist.org/templesldsorg/bc/Temples/photo-galleries/mexico-city-mexico/400x250/mexico-city-temple-exterior-1518361-wallpaper.jpg"
+      ,categories: ['old', 'large']
     },
     // Add more temple objects here...
     {
@@ -63,6 +70,7 @@ export const temples = [
         area: 25000,
         imageUrl:
         "https://content.churchofjesuschrist.org/templesldsorg/bc/Temples/photo-galleries/belem-brazil/400x250/belem_brazil_temple_exterior2.jpg"
+        ,categories: ['new', 'large']
     }
   ];
 

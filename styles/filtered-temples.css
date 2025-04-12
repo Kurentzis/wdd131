@@ -92,6 +92,7 @@ body {
     background-color: #808080;  
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1), inset 0 0 1px rgba(255, 255, 255, 0.6);
 }
+
 /* Animation of burger menu btn */
 .burger.active {
     background-color: beige;
@@ -200,14 +201,18 @@ main {
         border-radius: 5px;
         padding: 1rem;  
         width: 90vw;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
         margin: 10px  auto 0px auto;
         display: flex;
         justify-content: space-around;
         flex-direction:  column;
+        height: fit-content;
 
         & div {
             margin-bottom: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
     
         & img {

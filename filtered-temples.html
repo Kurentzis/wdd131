@@ -18,7 +18,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,700;1,700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Roboto&display=swap"
         rel="stylesheet">
-    <script type="module" src="scripts/filtered-temples.js" defer></script>
+    
     <title>Temple album</title>
 </head>
 
@@ -32,11 +32,11 @@
         </button>
         <nav class="header_nav">
             <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Old</a></li>
-                <li><a href="#">New</a></li>
-                <li><a href="#">Large</a></li>
-                <li><a href="#">Small</a></li>
+                <li><a href="#" data-filter="all" class="menuLink">Home</a></li>
+                <li><a href="#" data-filter="old" class="menuLink">Old</a></li>
+                <li><a href="#" data-filter="new" class="menuLink">New</a></li>
+                <li><a href="#" data-filter="large" class="menuLink">Large</a></li>
+                <li><a href="#" data-filter="small" class="menuLink">Small</a></li>
             </ul>
         </nav>
     </header>
@@ -52,7 +52,7 @@
         <hr>
         <p id="lastModified"></p>
     </footer>
-
+    <script type="module" src="scripts/filtered-temples.js"></script>
 </body>
 
 </html>
