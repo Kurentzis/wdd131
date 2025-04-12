@@ -191,24 +191,38 @@ footer p {
 }
 
 
+
 /* week 04 */
+main {
 
-.temple-card {
-    border: 1px solid black;
-    border-radius: 5px;
-    padding: 1rem;
-    margin: 1rem 0;
-    max-width: 600px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+   & .temple-card {
+        border: 1px solid black;
+        border-radius: 5px;
+        padding: 1rem;  
+        width: 90vw;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        margin: 10px  auto 0px auto;
+        display: flex;
+        justify-content: space-around;
+        flex-direction:  column;
 
-    & img {
-        max-width: 100%;
-        height: auto;
-        border-radius: 4px;
-        margin-top: 0.5rem;
-    }
-
-    & h2 {
-        text-align: center;
+        & div {
+            margin-bottom: 10px;
+        }
+    
+        & img {
+            width: 100%;
+            max-width: 70vw;
+            height: auto;
+            border-radius: 4px;
+            margin-top: auto;
+            margin-bottom: 0;
+            align-self: center;
+        }
+    
+        & h2 {
+            text-align: center;
+        }
     }
 }
+
