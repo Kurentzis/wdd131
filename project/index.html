@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/aqyua.css">
+    <link rel="stylesheet" href="styles/aqua_wide.css">
+    <script src="scripts/aqua.js" defer type="module"></script>
+    <script src="scripts/calculator.js" defer></script>
+    <script src="../scripts/getdates.js" defer></script>
+    <title>AquaGuide|Home</title>
+</head>
+<body>
+    <header>
+        <div class="header-contant-container">
+        <h1><a href="index.html">AquaGuide</a></h1>
+        <!-- <img class="header_image" src="images/aqua_small.webp" alt=""> -->
+        <picture>
+            <source media="(max-width: 500px)" srcset="images/aqua_small.webp">
+            <source media="(max-width: 1000px)" srcset="images/aqua_whole.webp">
+            <img src="images/aqua_whole.webp" alt="fish tank">
+        </picture>
+    </div>
+    </header>
+    <main>
+        <section class="main-element">
+            <h2>Micro</h2>
+            <h2 id="wide"><a href="#">Micro</a></h2>
+            <div class="micro-elements">
+                <div class="sub-element">
+                    <p class="element" data-filter="fe micro">Fe</p>
+                    
+                </div>
+                <div class="sub-element">
+                    <p class="element" data-filter="mn micro">Mn</p>
+                    
+                </div>
+                <div class="sub-element">
+                    <p class="element" data-filter="b micro">B</p>
+                    
+                </div>
+                <div class="sub-element">
+                    <p class="element" data-filter="zn micro">Zn</p>
+                    
+                </div>
+                <div class="sub-element">
+                    <p class="element" data-filter="cu micro">Cu</p>
+                    
+                </div>
+                <div class="sub-element">
+                    <p class="element" data-filter="mo micro">Mo</p>
+                    
+                </div>
+                
+                <div class="element-description-micro"></div>
+            </div>
+            
+        </section>
+        
+        <section class="main-element">
+            <h2>Macro</h2>
+            <h2 id="wide"><a href="#">Macro</a></h2>
+            <div class="macro-elements">
+                <div class="sub-element">
+                    <p class="element" data-filter="no3 macro">NO3</p>
+                    
+                </div>
+                <div class="sub-element">
+                    <p class="element" data-filter="po4 macro">PO4</p>
+                    
+                </div>
+                <div class="sub-element">
+                    <p class="element" data-filter="k macro">K</p>
+                    
+                </div>
+                <div class="sub-element">
+                    <p class="element" data-filter="mg macro">Mg</p>
+                    
+                </div>
+                <div class="sub-element">
+                    <p class="element" data-filter="ca macro">Ca</p>
+                    
+                </div>
+                <div class="element-description-macro"></div>
+            </div>
+        </section>
+        </div>
+        <section class="main-element">
+            <h2>Fertilizer Calculator</h2>
+            <h2 id="wide"><a href="#">Fertilizer Calculator</a></h2>
+            <div class="calculator">
+                <div class="form-group">
+                    <label for="aquariumVolume">Aquarium volume (liters):</label>
+                    <input required type="number" id="aquariumVolume" min="1" step="0.1" placeholder="Example: 50">
+                </div>
+                
+                <div class="form-group">
+                    <label for="dose">Fertilizer dose (ml):</label>
+                    <input required  type="number" id="dose" min="0.1" step="0.1" placeholder="Example: 5">
+                </div>
+                
+                <div class="form-group">
+                    <label for="element">Element:</label>
+                    <select required  id="element">
+                        <option value="NO3">Nitrates (NO3)</option>
+                        <option value="PO4">Phosphates (PO4)</option>
+                        <option value="K">Potassium (K)</option>
+                        <option value="Fe">Iron (Fe)</option>
+                        <option value="Mn">Manganese (Mn)</option>
+                        <option value="Cu">Copper (Cu)</option>
+                        <option value="Zn">Zinc (Zn)</option>
+                        <option value="B">Boron (B)</option>
+                        <option value="Mo">Molybdenum (Mo)</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="concentration">Element concentration in fertilizer:</label>
+                    <div class="concentration-group">
+                        <input required  type="number" id="concentrationValue" min="0.001" step="0.001" placeholder="Value">
+                        <select required  id="concentrationUnit">
+                            <option value="percent">%</option>
+                            <option value="mg">mg/l</option>
+                            <option value="grams">g/l</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="checkbox-group">
+                    <input type="checkbox" id="useCurrentConcentration">
+                    <label for="useCurrentConcentration">Consider current element concentration in aquarium</label>
+                </div>
+                
+                <div class="form-group" id="currentConcentrationGroup" style="display: none;">
+                    <label for="currentConcentration">Current element concentration (mg/l):</label>
+                    <input type="number" id="currentConcentration" min="0" step="0.1" placeholder="Example: 2">
+                </div>
+                <div id="errorConfirm"></div>
+                <button id="calculator">Calculate</button>
+                
+                <div class="result" id="result">
+                    <h3>Calculation Result</h3>
+                    <p>Element concentration in aquarium: <span id="resultValue">0</span> mg/l</p>
+                    
+                    <div class="element-info" id="elementInfo">
+                    </div>
+                </div>
+                
+                <div class="history" id="history">
+                    <h3>Measurement History</h3>
+                    <div id="historyItems"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p><span id="currentyear"></span> - Oleg Lasukov</p><hr><p id="lastModified"></p>
+    </footer>   
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/form.css">
+    <script src="scripts/form.js" defer></script>
+    <script src="scripts/getdates.js" defer></script>
+    <title>Product Review Form</title>
+</head>
+
+<body>
+    <h1>Product Review Form</h1>
+    <form method="get" action="review.html">
+        <div>
+            <label for="product" class="required">Product Name</label>
+            <select id="product" name="product" required>
+                <option value="" disabled selected>Select a Product...</option>
+            </select>
+        </div>
+
+        <div>
+            <label class="required">Overall Rating</label>
+            <div class="rating">
+                <label><input type="radio" name="rating" value="1" required> 1 ☆</label>
+                <label><input type="radio" name="rating" value="2"> 2 ☆☆</label>
+                <label><input type="radio" name="rating" value="3"> 3 ☆☆☆</label>
+                <label><input type="radio" name="rating" value="4"> 4 ☆☆☆☆</label>
+                <label><input type="radio" name="rating" value="5"> 5 ☆☆☆☆☆</label>
+            </div>
+        </div>
+
+        <div>
+            <label for="installDate" class="required">Date of Installation</label>
+            <input type="date" id="installDate" name="installDate" required>
+        </div>
+
+        <div>
+            <label>Useful Features (check all that apply)</label>
+            <div class="features">
+                <div><input type="checkbox" id="feature1" name="features" value="ease-of-use"><label for="feature1">Ease
+                        of Use</label></div>
+                <div><input type="checkbox" id="feature2" name="features" value="performance"><label
+                        for="feature2">Performance</label></div>
+                <div><input type="checkbox" id="feature3" name="features" value="design"><label
+                        for="feature3">Design</label></div>
+                <div><input type="checkbox" id="feature4" name="features" value="durability"><label
+                        for="feature4">Durability</label></div>
+            </div>
+        </div>
+
+        <div>
+            <label for="review">Written Review</label>
+            <textarea id="review" name="review" rows="5"></textarea>
+        </div>
+
+        <div>
+            <label for="username">User Name</label>
+            <input type="text" id="username" name="username">
+        </div>
+
+        <button type="submit">Submit Review</button>
+    </form>
+    <footer>
+        <p><span id="currentyear"></span> - Oleg Lasukov</p>
+        <hr>
+        <p id="lastModified"></p>
+    </footer>
+</body>
+
+</html>
