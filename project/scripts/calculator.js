@@ -50,7 +50,7 @@ const elementRecommendations = {
                     concentrationMgPerMl = concValue / volume;
                     break;
                 case 'grams':
-                    concentrationMgPerMl = dose  * concValue / volume;
+                    concentrationMgPerMl =  concValue * 1000;
                     break;
             }
             
