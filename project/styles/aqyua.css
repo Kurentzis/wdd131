@@ -120,7 +120,7 @@ main {
 .main-element.active .micro-elements,
 .main-element.active .macro-elements,
 .main-element.active .calculator {
-    max-height: 1000px; 
+    max-height: fit-content; 
     padding: 16px;
 } 
 .element-description-macro span,
