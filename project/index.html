@@ -90,6 +90,11 @@
             <h2 id="wide"><a href="#">Fertilizer Calculator</a></h2>
             <div class="calculator">
                 <div class="form-group">
+                    <label for="quariumName">Aquarium name:</label>
+                    <input required type="text" id="aquariumName" placeholder="Example: Main aquarium">
+                </div>
+                
+                <div class="form-group">
                     <label for="aquariumVolume">Aquarium volume (liters):</label>
                     <input required type="number" id="aquariumVolume" min="1" step="0.1" placeholder="Example: 50">
                 </div>
@@ -108,9 +113,9 @@
                         <option value="Fe">Iron (Fe)</option>
                         <option value="Mn">Manganese (Mn)</option>
                         <option value="Cu">Copper (Cu)</option>
-                        <option value="Zn">Zinc (Zn)</option>
+                        <!-- <option value="Zn">Zinc (Zn)</option>
                         <option value="B">Boron (B)</option>
-                        <option value="Mo">Molybdenum (Mo)</option>
+                        <option value="Mo">Molybdenum (Mo)</option> -->
                     </select>
                 </div>
                 
@@ -120,7 +125,7 @@
                         <input required  type="number" id="concentrationValue" min="0.001" step="0.001" placeholder="Value">
                         <select required  id="concentrationUnit">
                             <option value="percent">%</option>
-                            <option value="mg">mg/l</option>
+                            <!-- <option value="mg">mg/l</option> -->
                             <option value="grams">g/l</option>
                         </select>
                     </div>

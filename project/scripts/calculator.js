@@ -9,9 +9,9 @@ const elementRecommendations = {
             'Fe': { min: 0.1, max: 0.5, unit: 'mg/l', info: 'Iron is critical for chlorophyll synthesis. Deficiency causes chlorosis (yellowing) of leaves.' },
             'Mn': { min: 0.01, max: 0.1, unit: 'mg/l', info: 'Manganese participates in photosynthesis and enzyme activation.' },
             'Cu': { min: 0.002, max: 0.01, unit: 'mg/l', info: 'Copper is needed in trace amounts. Excess is toxic to invertebrates.' },
-            'Zn': { min: 0.005, max: 0.02, unit: 'mg/l', info: 'Zinc is important for plant growth hormone synthesis.' },
-            'B': { min: 0.01, max: 0.05, unit: 'mg/l', info: 'Boron participates in sugar transport and cell wall formation.' },
-            'Mo': { min: 0.0005, max: 0.002, unit: 'mg/l', info: 'Molybdenum is essential for plant nitrogen metabolism.' }
+            // 'Zn': { min: 0.005, max: 0.02, unit: 'mg/l', info: 'Zinc is important for plant growth hormone synthesis.' },
+            // 'B': { min: 0.01, max: 0.05, unit: 'mg/l', info: 'Boron participates in sugar transport and cell wall formation.' },
+            // 'Mo': { min: 0.0005, max: 0.002, unit: 'mg/l', info: 'Molybdenum is essential for plant nitrogen metabolism.' }
         };
 
         document.getElementById('useCurrentConcentration').addEventListener('change', function() {
@@ -24,6 +24,7 @@ const elementRecommendations = {
         });
 
         function calculate() {
+            const aquariumName = document.getElementById('aquariumName').value.trim()
             const volume = parseFloat(document.getElementById('aquariumVolume').value);
             const dose = parseFloat(document.getElementById('dose').value);
             const element = document.getElementById('element').value;
@@ -78,19 +79,22 @@ const elementRecommendations = {
             `;
             
 
-            saveToHistory(element, roundedResult);
+            saveToHistory(element, roundedResult, currentConc, dose, aquariumName);
             
 
             document.getElementById('result').scrollIntoView({ behavior: 'smooth' });
         }
 
-        function saveToHistory(element, concentration) {
+        function saveToHistory(element, concentration , currentConc, dose, aquariumName) {
             const history = JSON.parse(localStorage.getItem('fertilizerHistory')) || [];
             const elementName = document.getElementById('element').options[document.getElementById('element').selectedIndex].text;
             const timestamp = new Date().toLocaleString();
             
             history.unshift({
-                id: Date.now(), 
+                id: Date.now(),
+                aquariumName: aquariumName,
+                dose: dose,
+                currentConc: currentConc,
                 element: element,
                 elementName: elementName,
                 concentration: concentration,
@@ -123,10 +127,13 @@ const elementRecommendations = {
                 const historyItem = document.createElement('div');
                 historyItem.className = 'history-item';
                 historyItem.innerHTML = `
+                    <strong>${item.aquariumName ? item.aquariumName : 'Имя аквариума не указано'}</strong><br>
                     <strong>${item.elementName}</strong>: ${item.concentration.toLocaleString('en-US', {
                         minimumFractionDigits: 1,
-                        maximumFractionDigits: 3
+                        maximumFractionDigits: 2
                     })} ${recommendation.unit} ${status}<br>
+                    <p><strong>Внесено УДО: </strong> ${item.dose ? item.dose + ' ml' : 'Нет данных.'}</p>
+                    <p><strong>Концентрация до внесения УДО: </strong> ${item.currentConc? item.currentConc + ' mg/l': 'Нет данных'}</p>
                     <small>${item.timestamp}</small>
                     <button class="delete-btn" onclick="deleteHistoryItem(${item.id})">X</button>
                 `;
