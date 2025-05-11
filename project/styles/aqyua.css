@@ -202,6 +202,7 @@ button:hover {
     margin-right: 10px;
 }
 .history {
+    height: fit-content;
     margin-top: 20px;
     padding: 15px;
     background-color: #fff5f5;

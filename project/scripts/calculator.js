@@ -101,9 +101,9 @@ const elementRecommendations = {
                 timestamp: timestamp
             });
             
-            if (history.length > 10) {
-                history.pop();
-            }
+            // if (history.length > 10) {
+            //     history.pop();
+            // }
             
             localStorage.setItem('fertilizerHistory', JSON.stringify(history));
             loadHistory();
