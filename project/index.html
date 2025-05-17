@@ -93,70 +93,86 @@
             <h2 id="wide"><a href="#">Fertilizer Calculator</a></h2>
             <div class="calculator">
                 <div class="form-group">
-                    <label for="quariumName">Aquarium name:</label>
-                    <input required type="text" id="aquariumName" placeholder="Example: Main aquarium">
+                    <label for="calc_type">Тип расчёта:</label>
+                    <select required id="calc_type">
+                        <option value="udo_count">Расчитать опираясь на дозу УДО</option>
+                        <option value="target_count">Расчитать опираясь на целевую концентрацию</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="quariumName">Имя аквариума:</label>
+                    <input required type="text" id="aquariumName" placeholder="Например: Основной аквариум">
                 </div>
 
                 <div class="form-group">
-                    <label for="aquariumVolume">Aquarium volume (liters):</label>
-                    <input required type="number" id="aquariumVolume" min="1" step="0.1" placeholder="Example: 50">
+                    <label for="aquariumVolume">Объём аквариума (литр):</label>
+                    <input required type="number" id="aquariumVolume" min="1" step="0.1" placeholder="Например: 50">
+                </div>
+
+                <div class="form-group dose-active">
+                    <label for="dose">Доза удобрения (мл):</label>
+                    <input required type="number" id="dose" min="0.1" step="0.1" placeholder="Например: 5">
+                </div>
+
+                <div class="form-group target-active">
+                    <label for="targetConcentration">Целевая концентрация элемента (мг/л):</label>
+                    <input required type="number" id="targetConcentration" min="0.1" step="0.1" placeholder="Например: 10">
                 </div>
 
                 <div class="form-group">
-                    <label for="dose">Fertilizer dose (ml):</label>
-                    <input required type="number" id="dose" min="0.1" step="0.1" placeholder="Example: 5">
-                </div>
-
-                <div class="form-group">
-                    <label for="element">Element:</label>
+                    <label for="element">Элемент:</label>
                     <select required id="element">
-                        <option value="NO3">Nitrates (NO3)</option>
-                        <option value="PO4">Phosphates (PO4)</option>
-                        <option value="K">Potassium (K)</option>
-                        <option value="Fe">Iron (Fe)</option>
-                        <option value="Mn">Manganese (Mn)</option>
-                        <option value="Cu">Copper (Cu)</option>
-                        <!-- <option value="Zn">Zinc (Zn)</option>
-                        <option value="B">Boron (B)</option>
-                        <option value="Mo">Molybdenum (Mo)</option> -->
+                        <option value="NO3">Нитрат (NO3)</option>
+                        <option value="PO4">Фосфат (PO4)</option>
+                        <option value="K">Калий (K)</option>
+                        <option value="Fe">Железо (Fe)</option>
+                        <option value="Mn">Марганец (Mn)</option>
+                        <option value="Cu">Медь (Cu)</option>
                     </select>
                 </div>
 
                 <div class="form-group">
-                    <label for="concentration">Element concentration in fertilizer:</label>
+                    <label for="concentration">Концентрация элемента в удобрении:</label>
                     <div class="concentration-group">
                         <input required type="number" id="concentrationValue" min="0.001" step="0.001"
-                            placeholder="Value">
+                            placeholder="Введите число">
                         <select required id="concentrationUnit">
                             <option value="percent">%</option>
-                            <!-- <option value="mg">mg/l</option> -->
-                            <option value="grams">g/l</option>
+                            <option value="grams">г/л</option>
                         </select>
                     </div>
                 </div>
 
                 <div class="checkbox-group">
                     <input type="checkbox" id="useCurrentConcentration">
-                    <label for="useCurrentConcentration">Consider current element concentration in aquarium</label>
+                    <label for="useCurrentConcentration">Учитывать текущую концентрацию элемента в аквариуме:</label>
                 </div>
 
                 <div class="form-group" id="currentConcentrationGroup" style="display: none;">
-                    <label for="currentConcentration">Current element concentration (mg/l):</label>
-                    <input type="number" id="currentConcentration" min="0" step="0.1" placeholder="Example: 2">
+                    <label for="currentConcentration">Текущая концетрация элемента (мг/л):</label>
+                    <input type="number" id="currentConcentration" min="0" step="0.1" placeholder="Например: 2">
                 </div>
                 <div id="errorConfirm"></div>
-                <button id="calculator">Calculate</button>
+                <button id="calculator">Расчитать</button>
 
                 <div class="result" id="result">
-                    <h3>Calculation Result</h3>
-                    <p>Element concentration in aquarium: <span id="resultValue">0</span> mg/l</p>
+                    <h3>Результат</h3>
+                    <p>Итоговая концентрация элемента в аквариуме: <span id="resultValue">0</span> мг/л</p>
 
                     <div class="element-info" id="elementInfo">
                     </div>
                 </div>
 
+                <div class="result-target" id="result-target">
+                    <h3>Результат</h3>
+                    <p>Нужно внести: <span id="resultValueTarget">0</span> мл УДО</p>
+
+                    <div class="element-info" id="elementInfoTarget">
+                    </div>
+                </div>
+
                 <div class="history" id="history">
-                    <h3>Measurement History</h3>
+                    <h3>История расчётов и замеров:</h3>
                     <div id="historyItems"></div>
                 </div>
             </div>

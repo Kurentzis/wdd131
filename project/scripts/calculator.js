@@ -20,10 +20,27 @@ const elementRecommendations = {
         });
 
         document.addEventListener('DOMContentLoaded', function() {
+            document.querySelector('.target-active').style.display = 'none';
             loadHistory();
         });
 
+        document.getElementById('calc_type').addEventListener('change', function () {
+            if(this.value == 'target_count') {
+                document.querySelector('.dose-active').style.display = 'none';
+                document.querySelector('.target-active').style.display = 'block';
+                // document.querySelector('.active').classList.remove('active');
+            }
+            else {
+                
+                document.querySelector('.dose-active').style.display = 'block';
+                document.querySelector('.target-active').style.display = 'none';
+            }
+            
+        })
+
         function calculate() {
+            const calcType = document.getElementById('calc_type').value
+            const targetConcentration = document.getElementById('targetConcentration').value
             const aquariumName = document.getElementById('aquariumName').value.trim()
             const volume = parseFloat(document.getElementById('aquariumVolume').value);
             const dose = parseFloat(document.getElementById('dose').value);
@@ -33,13 +50,21 @@ const elementRecommendations = {
             const concValue = parseFloat(document.getElementById('concentrationValue').value);
             const concUnit = document.getElementById('concentrationUnit').value;
             const errorConfirm = document.getElementById('errorConfirm');
-            if (isNaN(volume) || isNaN(dose) || isNaN(concValue) || 
-                (useCurrent && isNaN(currentConc))) {
-                // alert('Please fill all required fields with valid numeric values!');
-                
-                errorConfirm.textContent = 'Please fill all required fields with valid numeric values!'
-                return;
+            if(calcType == 'udo_count') {
+                if (isNaN(volume) || isNaN(dose) || isNaN(concValue) || 
+                    (useCurrent && isNaN(currentConc))) {
+                    errorConfirm.textContent = 'Please fill all required fields with valid numeric values!'
+                    return;
+                }
+            } else {
+                if (isNaN(volume) || isNaN(targetConcentration) || isNaN(concValue) || 
+                    (useCurrent && isNaN(currentConc))) {
+                    errorConfirm.textContent = 'Please fill all required fields with valid numeric values!'
+                    return;
+                }
             }
+
+
             errorConfirm.textContent = '';
             let concentrationMgPerMl = 0;
             
@@ -54,22 +79,47 @@ const elementRecommendations = {
                     concentrationMgPerMl =  concValue;
                     break;
             }
+
+            let addedConcentration = null;
+            let result = null;
+            if(calcType == 'udo_count') {
+                addedConcentration = (dose * concentrationMgPerMl) / volume;
+                result = addedConcentration + currentConc;
+            } else {
+                addedConcentration = ((targetConcentration - currentConc) * volume) / concentrationMgPerMl;
+                result = addedConcentration
+            }
             
-            const addedConcentration = (dose * concentrationMgPerMl) / volume;
-            const result = addedConcentration + currentConc;
             
-            const roundedResult = Math.round(result * 1000) / 1000;
-            
-            document.getElementById('resultValue').textContent = roundedResult.toLocaleString('en-US', {
-                minimumFractionDigits: 1,
-                maximumFractionDigits: 3
-            });
-            document.getElementById('result').style.display = 'block';
+            const roundedResultOrig = Math.round(result * 1000) / 1000;
+            const roundedResult = roundedResultOrig.toFixed(2)
+            if(calcType == 'udo_count') {
+                document.getElementById('resultValue').textContent = roundedResult.toLocaleString('en-US', {
+                    minimumFractionDigits: 1,
+                    maximumFractionDigits: 2
+                });
+                document.getElementById('result').style.display = 'block';
+            } else {
+                document.getElementById('resultValueTarget').textContent = roundedResult.toLocaleString('en-US', {
+                    minimumFractionDigits: 1,
+                    maximumFractionDigits: 2
+                });
+                document.getElementById('result-target').style.display = 'block';
+            }
             
             const recommendation = elementRecommendations[element];
-            const elementInfo = document.getElementById('elementInfo');
+            let elementInfo = null
             
-            elementInfo.innerHTML = `
+            if(calcType == 'udo_count') {
+
+                document.getElementById('result-target').style.display = 'none';
+                document.getElementById('result').style.display = 'block';
+                elementInfo = document.getElementById('elementInfo');
+                document.getElementById('resultValue').textContent = roundedResult.toLocaleString('en-US', {
+                    minimumFractionDigits: 1,
+                    maximumFractionDigits: 2
+                });
+                elementInfo.innerHTML = `
                 <h4>Recommended values for ${document.getElementById('element').options[document.getElementById('element').selectedIndex].text}:</h4>
                 <p>Optimal range: ${recommendation.min}-${recommendation.max} ${recommendation.unit}</p>
                 <p>${recommendation.info}</p>
@@ -77,9 +127,27 @@ const elementRecommendations = {
                 ${roundedResult < recommendation.min ? '❌ Below recommended' : 
                   roundedResult > recommendation.max ? '⚠️ Above recommended' : '✅ Within optimal range'}</p>
             `;
+            saveToHistory(element, roundedResult, currentConc, dose, aquariumName);
+            } else {
+
+                document.getElementById('result-target').style.display = 'block';
+                document.getElementById('result').style.display = 'none';
+                elementInfo = document.getElementById('elementInfoTarget');
+                document.getElementById('resultValueTarget').textContent = roundedResult.toLocaleString('en-US', {
+                    minimumFractionDigits: 1,
+                    maximumFractionDigits: 2
+                });
+                elementInfo.innerHTML = `
+                <h4>Recommended values for ${document.getElementById('element').options[document.getElementById('element').selectedIndex].text}:</h4>
+                <p>Optimal range: ${recommendation.min}-${recommendation.max} ${recommendation.unit}</p>
+                <p>${recommendation.info}</p>
+                <p>Нужно внести: ${roundedResult} мл`;
+                saveToHistory(element, targetConcentration, currentConc, roundedResult, aquariumName);
+            }
+
             
 
-            saveToHistory(element, roundedResult, currentConc, dose, aquariumName);
+            // saveToHistory(element, roundedResult, currentConc, dose, aquariumName);
             
 
             document.getElementById('result').scrollIntoView({ behavior: 'smooth' });
