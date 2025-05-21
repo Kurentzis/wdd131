@@ -156,7 +156,9 @@ const elementRecommendations = {
         function saveToHistory(element, concentration , currentConc, dose, aquariumName) {
             const history = JSON.parse(localStorage.getItem('fertilizerHistory')) || [];
             const elementName = document.getElementById('element').options[document.getElementById('element').selectedIndex].text;
-            const timestamp = new Date().toLocaleString();
+            let timestamp = new Date() //.toLocaleString();
+            timestamp.setDate(timestamp.getDate() + 1)
+            timestamp = timestamp.toLocaleDateString()
             
             history.unshift({
                 id: Date.now(),
