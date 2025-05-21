@@ -157,7 +157,7 @@ const elementRecommendations = {
             const history = JSON.parse(localStorage.getItem('fertilizerHistory')) || [];
             const elementName = document.getElementById('element').options[document.getElementById('element').selectedIndex].text;
             let timestamp = new Date() //.toLocaleString();
-            timestamp.setDate(timestamp.getDate() + 1)
+            timestamp.setDate(timestamp.getDate())
             timestamp = timestamp.toLocaleDateString()
             
             history.unshift({

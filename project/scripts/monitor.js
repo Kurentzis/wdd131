@@ -18,7 +18,8 @@ function loadHistory() {
   let element = document.getElementById('element').value
 
   history.forEach((item) => {
-    if(item.element.toLowerCase() == element) {
+    try {
+      if(item.element.toLowerCase() == element) {
       const historyItem = document.createElement("div");
       let label = item.timestamp;
       labels.push(label);
@@ -33,6 +34,10 @@ function loadHistory() {
         label: "Концентрация после УДО"
       }
    }
+    } catch (error) {
+      console.log(item.id)
+    }
+
 
   });
   var myChart = new Chart(ctx, {
