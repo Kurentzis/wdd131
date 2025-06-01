@@ -4,6 +4,7 @@ let dataSets = [];
 let dataArrayTotalConcentration = [];
 let dataArrayBeforeUDO = [];
 let dataArrayDose = [];
+let dataArrayWaterChange = [];
 let dataLabel = [];
 
 function loadHistory() {
@@ -31,11 +32,7 @@ function loadHistory() {
         dataArrayTotalConcentration.push(item.concentration);
         dataArrayBeforeUDO.push(item.currentConc);
         dataArrayDose.push(item.dose);
-
-        let dataObj = {
-          data: dataArrayTotalConcentration,
-          label: "Концентрация после УДО",
-        };
+        dataArrayWaterChange.push(item.waterReplacement);
       }
     } catch (error) {
       console.log(item.id);
@@ -67,6 +64,13 @@ function loadHistory() {
           backgroundColor: "#71d1bd",
           fill: false,
         },
+        {
+          data: dataArrayWaterChange, //[70, 90, 44, 60, 83, 90, 100],
+          label: "Концентрация до подмены",
+          borderColor: "#5722cf",
+          backgroundColor: "#5722cf",
+          fill: false,
+        },
       ],
     },
   });
@@ -79,6 +83,7 @@ document.getElementById("element").addEventListener("change", function () {
   dataArrayBeforeUDO = [];
   dataArrayDose = [];
   dataLabel = [];
+  dataArrayWaterChange = [];
   loadHistory();
 });
 
@@ -89,6 +94,7 @@ document.getElementById("aquarium").addEventListener("change", function () {
   dataArrayBeforeUDO = [];
   dataArrayDose = [];
   dataLabel = [];
+  dataArrayWaterChange = [];
   loadHistory();
 });
 
