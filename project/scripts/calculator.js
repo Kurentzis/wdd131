@@ -19,6 +19,11 @@ const elementRecommendations = {
                 this.checked ? 'block' : 'none';
         });
 
+        document.getElementById('useWaterReplacement').addEventListener('change', function() {
+            document.getElementById('waterReplacementGroup').style.display = 
+                this.checked ? 'block' : 'none';
+        });
+
         document.addEventListener('DOMContentLoaded', function() {
             document.querySelector('.target-active').style.display = 'none';
             loadHistory();
@@ -46,10 +51,17 @@ const elementRecommendations = {
             const dose = parseFloat(document.getElementById('dose').value);
             const element = document.getElementById('element').value;
             const useCurrent = document.getElementById('useCurrentConcentration').checked;
+            const useWaterReplacement = document.getElementById('useWaterReplacement').checked
             const currentConc = useCurrent ? parseFloat(document.getElementById('currentConcentration').value) || 0 : 0;
+            
             const concValue = parseFloat(document.getElementById('concentrationValue').value);
             const concUnit = document.getElementById('concentrationUnit').value;
             const errorConfirm = document.getElementById('errorConfirm');
+
+            let waterReplacement = useWaterReplacement ? currentConc / (volume - parseFloat(document.getElementById('replacementAmount').value)) * volume : currentConc;
+            waterReplacement = waterReplacement.toFixed(2);
+
+
             if(calcType == 'udo_count') {
                 if (isNaN(volume) || isNaN(dose) || isNaN(concValue) || 
                     (useCurrent && isNaN(currentConc))) {
@@ -127,7 +139,7 @@ const elementRecommendations = {
                 ${roundedResult < recommendation.min ? '❌ Below recommended' : 
                   roundedResult > recommendation.max ? '⚠️ Above recommended' : '✅ Within optimal range'}</p>
             `;
-            saveToHistory(element, roundedResult, currentConc, dose, aquariumName);
+            saveToHistory(element, roundedResult, currentConc, dose, aquariumName, waterReplacement);
             } else {
 
                 document.getElementById('result-target').style.display = 'block';
@@ -142,7 +154,7 @@ const elementRecommendations = {
                 <p>Optimal range: ${recommendation.min}-${recommendation.max} ${recommendation.unit}</p>
                 <p>${recommendation.info}</p>
                 <p>Нужно внести: ${roundedResult} мл`;
-                saveToHistory(element, targetConcentration, currentConc, roundedResult, aquariumName);
+                saveToHistory(element, targetConcentration, currentConc, roundedResult, aquariumName, waterReplacement);
             }
 
             
@@ -153,7 +165,7 @@ const elementRecommendations = {
             document.getElementById('result').scrollIntoView({ behavior: 'smooth' });
         }
 
-        function saveToHistory(element, concentration , currentConc, dose, aquariumName) {
+        function saveToHistory(element, concentration , currentConc, dose, aquariumName, waterReplacement) {
             const history = JSON.parse(localStorage.getItem('fertilizerHistory')) || [];
             const elementName = document.getElementById('element').options[document.getElementById('element').selectedIndex].text;
             let timestamp = new Date() //.toLocaleString();
@@ -168,6 +180,7 @@ const elementRecommendations = {
                 element: element,
                 elementName: elementName,
                 concentration: concentration,
+                waterReplacement: waterReplacement,
                 timestamp: timestamp
             });
             
@@ -204,6 +217,7 @@ const elementRecommendations = {
                     })} ${recommendation.unit} ${status}<br>
                     <p><strong>Внесено УДО: </strong> ${item.dose ? item.dose + ' ml' : 'Нет данных.'}</p>
                     <p><strong>Концентрация до внесения УДО: </strong> ${item.currentConc? item.currentConc + ' mg/l': 'Нет данных'}</p>
+                    <p><strong>Концентрация до подмены воды: </strong> ${item.waterReplacement? item.waterReplacement + ' mg/l': 'Нет данных'}</p>
                     <small>${item.timestamp}</small>
                     <button class="delete-btn" onclick="deleteHistoryItem(${item.id})">X</button>
                 `;
