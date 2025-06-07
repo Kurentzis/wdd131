@@ -43,13 +43,13 @@ function loadHistory() {
     data: {
       labels: labels,
       datasets: [
-        {
-          data: dataArrayDose, //[10, 21, 60, 44, 17, 21, 17],
-          label: "Внесенная доза",
-          borderColor: "#ffa500",
-          backgroundColor: "#ffc04d",
-          fill: false,
-        },
+        // {
+        //   data: dataArrayDose, //[10, 21, 60, 44, 17, 21, 17],
+        //   label: "Внесенная доза",
+        //   borderColor: "#ffa500",
+        //   backgroundColor: "#ffc04d",
+        //   fill: false,
+        // },
         {
           data: dataArrayTotalConcentration,
           label: "Концентрация после УДО",
