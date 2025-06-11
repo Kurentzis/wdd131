@@ -10,7 +10,6 @@ let dataLabel = [];
 function loadHistory() {
   const history = JSON.parse(localStorage.getItem("fertilizerHistory")) || [];
 
-
   const historyContainer = document.getElementById("historyItems");
   if (history.length === 0) {
     historyContainer.innerHTML = "<p>No measurements recorded yet.</p>";
@@ -19,6 +18,7 @@ function loadHistory() {
   let element = document.getElementById("element").value;
   let aquarium = document.getElementById("aquarium").value;
 
+  let currentElementItemsArray = [];
   history.forEach((item) => {
     try {
       if (
@@ -28,11 +28,9 @@ function loadHistory() {
         const historyItem = document.createElement("div");
         let label = item.timestamp;
         labels.push(label);
+        let index = history.indexOf(item);
         console.log(item);
-        let currentConsuming = calculateDailyConsuming(history[0], history[1]);
-        let previousConsuming = calculateDailyConsuming(history[1], history[2]);
-        let dynamic = calculateDynamic(currentConsuming, previousConsuming);
-        printMonitorResult(currentConsuming, dynamic);
+        currentElementItemsArray.push(item);
 
         dataArrayTotalConcentration.push(item.concentration);
         dataArrayBeforeUDO.push(item.currentConc);
@@ -43,6 +41,12 @@ function loadHistory() {
       console.log(item.id);
     }
   });
+
+  
+  let currentConsuming = calculateDailyConsuming(currentElementItemsArray[0], currentElementItemsArray[1]);
+  let previousConsuming = calculateDailyConsuming(currentElementItemsArray[1], currentElementItemsArray[2]);
+  let dynamic = calculateDynamic(currentConsuming, previousConsuming);
+  printMonitorResult(currentConsuming, dynamic);
   var myChart = new Chart(ctx, {
     type: "line",
     data: {
@@ -81,9 +85,8 @@ function loadHistory() {
   });
 }
 
-
 function calculateDailyConsuming(dayOne, dayTwo) {
-  let days = (dayOne.id - dayTwo.id) / (1000 * 60 * 60 *24);
+  let days = (dayOne.id - dayTwo.id) / (1000 * 60 * 60 * 24);
   console.log(days);
   let result = (dayTwo.concentration - dayOne.waterReplacement) / days;
 
@@ -96,16 +99,22 @@ function calculateDynamic(currentPeriod, previousPeriod) {
 }
 
 function printMonitorResult(currentConsuming, dynamic) {
-  let dailyConsumingContainer = document.getElementById('dailyConsuming');
-  dailyConsumingContainer.innerHTML = '';
-  dailyConsumingContainer.innerHTML = `Среднесуточное потребление элемента: ${currentConsuming.toFixed(2)}. Потребление ${dynamic > 0 ? 'повысилось на: ' : 'понизилось на: '} <span id="dynamic">${dynamic.toFixed(2)}</span>`;
-  let dynamicContainer = document.getElementById('dynamic');
-  dynamic > 0 ? dynamicContainer.style.color = 'green' : dynamicContainer.style.color = 'red';
+  let dailyConsumingContainer = document.getElementById("dailyConsuming");
+  dailyConsumingContainer.innerHTML = "";
+  dailyConsumingContainer.innerHTML = `Среднесуточное потребление элемента: ${currentConsuming.toFixed(
+    2
+  )}. Потребление ${
+    dynamic > 0 ? "повысилось на: " : "понизилось на: "
+  } <span id="dynamic">${dynamic.toFixed(2)}</span>`;
+  let dynamicContainer = document.getElementById("dynamic");
+  dynamic > 0
+    ? (dynamicContainer.style.color = "green")
+    : (dynamicContainer.style.color = "red");
 }
 
 document.getElementById("element").addEventListener("change", function () {
-    let dailyConsumingContainer = document.getElementById('dailyConsuming');
-  dailyConsumingContainer.innerHTML = '';
+  let dailyConsumingContainer = document.getElementById("dailyConsuming");
+  dailyConsumingContainer.innerHTML = "";
   labels = [];
   dataSets = [];
   dataArrayTotalConcentration = [];
@@ -117,8 +126,8 @@ document.getElementById("element").addEventListener("change", function () {
 });
 
 document.getElementById("aquarium").addEventListener("change", function () {
-    let dailyConsumingContainer = document.getElementById('dailyConsuming');
-  dailyConsumingContainer.innerHTML = '';
+  let dailyConsumingContainer = document.getElementById("dailyConsuming");
+  dailyConsumingContainer.innerHTML = "";
   labels = [];
   dataSets = [];
   dataArrayTotalConcentration = [];
