@@ -42,11 +42,16 @@ function loadHistory() {
     }
   });
 
-  
-  let currentConsuming = calculateDailyConsuming(currentElementItemsArray[0], currentElementItemsArray[1]);
+  try {
+     let currentConsuming = calculateDailyConsuming(currentElementItemsArray[0], currentElementItemsArray[1]);
   let previousConsuming = calculateDailyConsuming(currentElementItemsArray[1], currentElementItemsArray[2]);
   let dynamic = calculateDynamic(currentConsuming, previousConsuming);
   printMonitorResult(currentConsuming, dynamic);
+  } catch(error) {
+      let dailyConsumingContainer = document.getElementById("dailyConsuming");
+  dailyConsumingContainer.innerText = "Недостаточно данных для сравнения. Продолжайте вносить данные!";
+  }
+
   var myChart = new Chart(ctx, {
     type: "line",
     data: {
