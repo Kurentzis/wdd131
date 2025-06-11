@@ -9,10 +9,7 @@ let dataLabel = [];
 
 function loadHistory() {
   const history = JSON.parse(localStorage.getItem("fertilizerHistory")) || [];
-  let currentConsuming = calculateDailyConsuming(history[0], history[1]);
-  let previousConsuming = calculateDailyConsuming(history[1], history[2]);
-  let dynamic = calculateDynamic(currentConsuming, previousConsuming);
-  printMonitorResult(currentConsuming, dynamic);
+
 
   const historyContainer = document.getElementById("historyItems");
   if (history.length === 0) {
@@ -32,6 +29,10 @@ function loadHistory() {
         let label = item.timestamp;
         labels.push(label);
         console.log(item);
+        let currentConsuming = calculateDailyConsuming(history[0], history[1]);
+        let previousConsuming = calculateDailyConsuming(history[1], history[2]);
+        let dynamic = calculateDynamic(currentConsuming, previousConsuming);
+        printMonitorResult(currentConsuming, dynamic);
 
         dataArrayTotalConcentration.push(item.concentration);
         dataArrayBeforeUDO.push(item.currentConc);
@@ -96,12 +97,15 @@ function calculateDynamic(currentPeriod, previousPeriod) {
 
 function printMonitorResult(currentConsuming, dynamic) {
   let dailyConsumingContainer = document.getElementById('dailyConsuming');
+  dailyConsumingContainer.innerHTML = '';
   dailyConsumingContainer.innerHTML = `Среднесуточное потребление элемента: ${currentConsuming.toFixed(2)}. Потребление ${dynamic > 0 ? 'повысилось на: ' : 'понизилось на: '} <span id="dynamic">${dynamic.toFixed(2)}</span>`;
   let dynamicContainer = document.getElementById('dynamic');
   dynamic > 0 ? dynamicContainer.style.color = 'green' : dynamicContainer.style.color = 'red';
 }
 
 document.getElementById("element").addEventListener("change", function () {
+    let dailyConsumingContainer = document.getElementById('dailyConsuming');
+  dailyConsumingContainer.innerHTML = '';
   labels = [];
   dataSets = [];
   dataArrayTotalConcentration = [];
@@ -113,6 +117,8 @@ document.getElementById("element").addEventListener("change", function () {
 });
 
 document.getElementById("aquarium").addEventListener("change", function () {
+    let dailyConsumingContainer = document.getElementById('dailyConsuming');
+  dailyConsumingContainer.innerHTML = '';
   labels = [];
   dataSets = [];
   dataArrayTotalConcentration = [];
