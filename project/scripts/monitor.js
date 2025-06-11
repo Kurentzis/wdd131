@@ -9,8 +9,12 @@ let dataLabel = [];
 
 function loadHistory() {
   const history = JSON.parse(localStorage.getItem("fertilizerHistory")) || [];
+  let currentConsuming = calculateDailyConsuming(history[0], history[1]);
+  let previousConsuming = calculateDailyConsuming(history[1], history[2]);
+  let dynamic = calculateDynamic(currentConsuming, previousConsuming);
+  printMonitorResult(currentConsuming, dynamic);
+
   const historyContainer = document.getElementById("historyItems");
-  console.log(history);
   if (history.length === 0) {
     historyContainer.innerHTML = "<p>No measurements recorded yet.</p>";
     return;
@@ -27,7 +31,7 @@ function loadHistory() {
         const historyItem = document.createElement("div");
         let label = item.timestamp;
         labels.push(label);
-        // labels.sort();
+        console.log(item);
 
         dataArrayTotalConcentration.push(item.concentration);
         dataArrayBeforeUDO.push(item.currentConc);
@@ -74,6 +78,27 @@ function loadHistory() {
       ],
     },
   });
+}
+
+
+function calculateDailyConsuming(dayOne, dayTwo) {
+  let days = (dayOne.id - dayTwo.id) / (1000 * 60 * 60 *24);
+  console.log(days);
+  let result = (dayTwo.concentration - dayOne.waterReplacement) / days;
+
+  return result;
+}
+
+function calculateDynamic(currentPeriod, previousPeriod) {
+  let result = currentPeriod - previousPeriod;
+  return result;
+}
+
+function printMonitorResult(currentConsuming, dynamic) {
+  let dailyConsumingContainer = document.getElementById('dailyConsuming');
+  dailyConsumingContainer.innerHTML = `Среднесуточное потребление элемента: ${currentConsuming.toFixed(2)}. Потребление ${dynamic > 0 ? 'повысилось на: ' : 'понизилось на: '} <span id="dynamic">${dynamic.toFixed(2)}</span>`;
+  let dynamicContainer = document.getElementById('dynamic');
+  dynamic > 0 ? dynamicContainer.style.color = 'green' : dynamicContainer.style.color = 'red';
 }
 
 document.getElementById("element").addEventListener("change", function () {
