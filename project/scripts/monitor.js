@@ -43,15 +43,23 @@ function loadHistory() {
   });
 
   try {
-     let currentConsuming = calculateDailyConsuming(currentElementItemsArray[0], currentElementItemsArray[1]);
-  let previousConsuming = calculateDailyConsuming(currentElementItemsArray[1], currentElementItemsArray[2]);
-  let dynamic = calculateDynamic(currentConsuming, previousConsuming);
-  printMonitorResult(currentConsuming, dynamic);
-  } catch(error) {
-      let dailyConsumingContainer = document.getElementById("dailyConsuming");
-  dailyConsumingContainer.innerText = "Недостаточно данных для сравнения. Продолжайте вносить данные!";
+    let currentConsuming = calculateDailyConsuming(
+      currentElementItemsArray[0],
+      currentElementItemsArray[1]
+    );
+    let previousConsuming = calculateDailyConsuming(
+      currentElementItemsArray[1],
+      currentElementItemsArray[2]
+    );
+    let dynamic = calculateDynamic(currentConsuming, previousConsuming);
+    printMonitorResult(currentConsuming, dynamic);
+    // calculateConsumedAmount(currentElementItemsArray[0], currentConsuming);
+    
+  } catch (error) {
+    let dailyConsumingContainer = document.getElementById("dailyConsuming");
+    dailyConsumingContainer.innerText =
+      "Недостаточно данных для сравнения. Продолжайте вносить данные!";
   }
-
   var myChart = new Chart(ctx, {
     type: "line",
     data: {
@@ -97,6 +105,16 @@ function calculateDailyConsuming(dayOne, dayTwo) {
 
   return result;
 }
+
+function calculateConsumedAmount(day, currentConsuming) {
+  let currConcentrationElement = document.getElementById(
+    "currentConcentration"
+  );
+  let daysSinceLastMeasurement = (Date.now() - day.id) / (1000 * 60 * 60 * 24);
+  let result = day.concentration - currentConsuming * daysSinceLastMeasurement;
+  currConcentrationElement.value = result.toFixed(2);
+}
+
 
 function calculateDynamic(currentPeriod, previousPeriod) {
   let result = currentPeriod - previousPeriod;
@@ -146,3 +164,4 @@ document.getElementById("aquarium").addEventListener("change", function () {
 document.addEventListener("DOMContentLoaded", function () {
   loadHistory();
 });
+
