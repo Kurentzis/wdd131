@@ -37,6 +37,18 @@ const elementRecommendations = {
     unit: "mg/l",
     info: "Copper is needed in trace amounts. Excess is toxic to invertebrates.",
   },
+  Mg: {
+    min: 5,
+    max: 15,
+    unit: "mg/l",
+    info: "Mg is important",
+  },
+  Ca: {
+    min: 20,
+    max: 50,
+    unit: "mg/l",
+    info: "Ca is important",
+  },
   // 'Zn': { min: 0.005, max: 0.02, unit: 'mg/l', info: 'Zinc is important for plant growth hormone synthesis.' },
   // 'B': { min: 0.01, max: 0.05, unit: 'mg/l', info: 'Boron participates in sugar transport and cell wall formation.' },
   // 'Mo': { min: 0.0005, max: 0.002, unit: 'mg/l', info: 'Molybdenum is essential for plant nitrogen metabolism.' }
