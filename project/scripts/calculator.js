@@ -25,6 +25,12 @@ const elementRecommendations = {
     unit: "mg/l",
     info: "Iron is critical for chlorophyll synthesis. Deficiency causes chlorosis (yellowing) of leaves.",
   },
+  FeH: {
+    min: 0.1,
+    max: 0.5,
+    unit: "mg/l",
+    info: "Iron(хелат) is critical for chlorophyll synthesis. Deficiency causes chlorosis (yellowing) of leaves.",
+  },
   Mn: {
     min: 0.01,
     max: 0.1,
